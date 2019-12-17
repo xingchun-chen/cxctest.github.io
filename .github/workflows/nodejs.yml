@@ -12,7 +12,7 @@ jobs:
         node-version: [12.12.0]
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@deploy_test
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -32,7 +32,7 @@ jobs:
       with:
 #         ACCESS_TOKEN: ${{ secrets.cxctestio }}
         ACCESS_TOKEN: ${{ secrets.TEST_ACCESS_TOKEN }}
-        BASE_BRANCH: master
-        BRANCH: deploy_test
+        BASE_BRANCH: deploy_test
+        BRANCH: master
         FOLDER: dist 
 #         BUILD_SCRIPT: npm install && npm run build
