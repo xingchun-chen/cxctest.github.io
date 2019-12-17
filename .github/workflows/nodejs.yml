@@ -41,13 +41,13 @@ jobs:
       - name: Download Artifacts # The built project is downloaded into the 'site' folder.
         uses: actions/download-artifact@v1
         with:
-          name: site
+          path: dist
 
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.TEST_ACCESS_TOKEN }}
           BRANCH: deploy_test
-          FOLDER: 'site' 
+          FOLDER: dist 
         
 
