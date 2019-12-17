@@ -2,6 +2,7 @@
   "name": "site",
   "version": "0.0.1",
   "private": true,
+   "homepage": "https://xingchun-chen.github.io/cxctest.github.io",
   "scripts": {
     "start": "docsite start",
     "build": "docsite build"
