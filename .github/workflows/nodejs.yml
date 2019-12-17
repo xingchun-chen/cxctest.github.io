@@ -29,7 +29,8 @@ jobs:
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@master
       with:
-        ACCESS_TOKEN: ${{ secrets.cxctestio }}
+#         ACCESS_TOKEN: ${{ secrets.cxctestio }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BASE_BRANCH: master
         BRANCH: deploy_test
         FOLDER: dist 
