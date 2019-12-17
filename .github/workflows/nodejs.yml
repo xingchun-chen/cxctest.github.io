@@ -12,16 +12,21 @@ jobs:
         node-version: [12.12.0]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    
-    - name: Build and Deploy
+    - name: Build
+      run: |
+        mkdir dist && npm install && npm i docsite && node_modules/docsite/bin/docsite.js build && cp -r baidu_verify_*.html googleff48c3fa45891a20.html sitemap.xml 404.html .asf.yaml index.html en-us zh-cn build img download dist/
+    - name: Deploy
       uses: JamesIves/github-pages-deploy-action@master
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master
-        FOLDER: . 
-        BUILD_SCRIPT: npm install && npm run build
+        ACCESS_TOKEN: ${{ secrets.IO_ACCESS_TOKEN }}
+        BASE_BRANCH: master
+        BRANCH: deploy_test
+        FOLDER: dist 
+#         BUILD_SCRIPT: npm install && npm run build
+        
+
