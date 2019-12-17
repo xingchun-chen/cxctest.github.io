@@ -20,6 +20,7 @@ jobs:
         
     - name: Install # The project is built using npm and placed in the 'build' folder.
       run: |
+          mkdir dist
           npm install
           npm run build
    
@@ -27,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
           name: site
-          path: build
+          path: dist
     
   
   deploy:
