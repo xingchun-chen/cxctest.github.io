@@ -17,16 +17,36 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Build
+        
+    - name: Install # The project is built using npm and placed in the 'build' folder.
       run: |
-        mkdir dist && npm install && npm run build && cp -r baidu_verify_*.html googleff48c3fa45891a20.html sitemap.xml 404.html .asf.yaml index.html en-us zh-cn node_modules img download dist/
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@master
+          npm install
+          npm run build
+   
+    - name: Upload Artifacts # The project is then uploaded as an artifact named 'site'.
+      uses: actions/upload-artifact@v1
       with:
-        ACCESS_TOKEN: ${{ secrets.TEST_ACCESS_TOKEN }}
-        BASE_BRANCH: master
-        BRANCH: deploy_test
-        FOLDER: dist 
-#         BUILD_SCRIPT: npm install && npm run build
+          name: site
+          path: build
+    
+  
+  deploy:
+    needs: [build] # The second job must depend on the first one to complete before running, and uses ubuntu-latest instead of windows.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+ 
+      - name: Download Artifacts # The built project is downloaded into the 'site' folder.
+        uses: actions/download-artifact@v1
+        with:
+          name: site
+
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.TEST_ACCESS_TOKEN }}
+          BRANCH: deploy_test
+          FOLDER: 'site' 
         
 
