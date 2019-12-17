@@ -21,7 +21,7 @@ jobs:
     - name: mkdir dist
       run: |
        echo "当前目录：`pwd`" 
-       echo "token: ${{ secrets.IO_ACCESS_TOKEN }}"    
+       echo "token: ${secrets.IO_ACCESS_TOKEN}"    
        echo "构建前目录：`ls -la`"
        mkdir dist && npm install && npm run build && cp -rf baidu_verify_*.html googleff48c3fa45891a20.html sitemap.xml 404.html .asf.yaml index.html en-us zh-cn  img download node_modules dist/
        echo "构建后目录：`ls -la`"
@@ -31,7 +31,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@master
       with:
 #         ACCESS_TOKEN: ${{ secrets.cxctestio }}
-        ACCESS_TOKEN: ${{ secrets.IO_ACCESS_TOKEN }}
+        ACCESS_TOKEN: ${{secrets.IO_ACCESS_TOKEN}}
         BASE_BRANCH: master
         BRANCH: deploy_test
         FOLDER: dist 
