@@ -31,7 +31,7 @@ jobs:
 #       uses: peaceiris/actions-gh-pages@v2.4.0
       with:
 #         ACCESS_TOKEN: ${{ secrets.cxctestio }}
-        ACCESS_TOKEN: ${{ secrets.TEST_ACCESS_TOKEN }}
-        BRANCH: master
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: deploy_test
         FOLDER: dist 
 #         BUILD_SCRIPT: npm install && npm run build
